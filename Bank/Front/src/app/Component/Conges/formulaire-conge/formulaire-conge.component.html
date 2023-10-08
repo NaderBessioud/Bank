@@ -1,0 +1,37 @@
+<div>
+    <form>
+        <div class="mb-3">
+            <label for="titre" class="form-label">idUser</label>
+            <input type="text" class="form-control" id="titre" [(ngModel)]="idU" name="titre"
+                #titre="ngModel">
+
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Date Debut</label>
+            <input type="date" class="form-control" id="description" [(ngModel)]="conge.datedebut"
+                name="description" #description="ngModel">
+        </div>
+        <div class="mb-3">
+            <label for="heure" class="form-label">Date Fin</label>
+            <input type="date" class="form-control" id="heure" [(ngModel)]="conge.datefin" name="heure"
+                #heure="ngModel">
+        </div>
+        <div class="mb-3">
+            <label for="nbrparticipant" class="form-label">Description</label>
+            <input type="text" class="form-control" id="nbrparticipant" [(ngModel)]="conge.description"
+                name="nbrparticipant" #nbrparticipant="ngModel">
+        </div>
+
+      
+
+
+
+        <button type="submit" class="btn btn-primary" (click)="ajouter_conge(conge,idU)">Ajouter</button>
+        <button type="submit" class="btn btn-danger" > Retour</button>
+    </form>
+
+</div>
+
+
+
+

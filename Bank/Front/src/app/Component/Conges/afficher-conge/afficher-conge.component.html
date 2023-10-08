@@ -1,0 +1,131 @@
+<div>
+    <div class="form-row">
+        <div class="form-group col-md-3"> <button type="button" class="btn btn-primary" class="bi bi-eye-fill" style="width: 90px; 
+    height: 50px; background-color:yellow;" (click)="gotojourferier()">Jour férié </button></div>
+
+        <div class="form-group col-md-3"> <button type="button" class="btn btn-primary" class="bi bi-eye-fill" style="width: 90px; 
+    height: 50px; background-color:red;" (click)="get_all_congesnonaccepter()">Liste de Demandes des Conges </button>
+        </div>
+        <div class="form-group col-md-3"> <button type="button" class="btn btn-primary" class="bi bi-eye-fill" style="width: 90px; 
+height: 50px; background-color:green;" (click)="get_all_congesaccepter()">Liste des Conges </button></div>
+        <div class="form-group col-md-3"> <button type="button" class="btn btn-primary" class="bi bi-eye-fill" style="width: 90px; 
+height: 50px; background-color:green;" (click)="gotoDemandeConge()">Demande Conge </button></div>
+    </div>
+    <div>
+        <div class="row" style="display:{{x}};">
+            <div class="col-sm-12">
+                <table
+                    class="data-table table hover multiple-select-row nowrap dataTable no-footer dtr-inline collapsed"
+                    id="DataTables_Table_1" role="grid" aria-describedby="DataTables_Table_1_info">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"
+                                aria-label="Age: activate to sort column ascending">Nom</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"
+                                aria-label="Age: activate to sort column ascending">Prenom</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"
+                                aria-label="Age: activate to sort column ascending">Role</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"
+                                aria-label="Age: activate to sort column ascending">Date Debut</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"
+                                aria-label="Office: activate to sort column ascending">Date Fin</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"
+                                aria-label="Address: activate to sort column ascending">Description</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr role="row" class="odd" *ngFor="let f of lists ">
+                            <td>{{f.employeecon.nom}}</td>
+                            <td>{{f.employeecon.prenom}}</td>
+                            <td>{{f.employeecon.role}}</td>
+                            <td class="table-plus sorting_1" tabindex="0">{{f.datedebut}}</td>
+                            <td>{{f.datefin}}</td>
+                            <td>{{f.description}}</td>
+
+
+                            <td>
+                                <div class="form-row" *ngIf="f.statut==false">
+                                    <div class="form-group col-md-3"> <button type="button" class="btn btn-primary"
+                                            class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            style="width: 70px; 
+                            height: 50px; background-color:green;" (click)="getEmailandId(f.idConge,f.employeecon.email)"
+                                           >Accepter</button></div>
+
+                                    <div class="form-group col-md-3">
+
+
+                                        <button type="button btn-block" class="btn btn-danger" data-toggle="modal"
+                                            data-target="#confirmation-modal" class="bi bi-trash" style="margin:auto ;"
+                                            style="width: 80px; 
+                                        height: 50px; background-color: red;"
+                                            (click)="delete_conge(f.idConge)">Supprimer</button>
+                                        <div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog"
+                                            aria-hidden="true" style="display: none;">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body text-center font-18">
+                                                        <h4 class="padding-top-30 mb-30 weight-500">
+                                                            Are you sure you want to continue?
+                                                        </h4>
+                                                        <div class="padding-bottom-30 row"
+                                                            style="max-width: 170px; margin: 0 auto">
+                                                            <div class="col-6">
+                                                                <button type="button"
+                                                                    class="btn btn-secondary border-radius-100 btn-block confirmation-btn"
+                                                                    data-dismiss="modal">
+                                                                    <i class="fa fa-times"></i>
+                                                                </button>
+                                                                NO
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <button type="button"
+                                                                    class="btn btn-primary border-radius-100 btn-block confirmation-btn"
+                                                                    data-dismiss="modal">
+                                                                    <i class="fa fa-check"></i>
+                                                                </button>
+                                                                YES
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-4">
+                        <div class="col-md-9">
+                            <textarea id="textarea-input" name="textarea-input" rows="9" [(ngModel)]="body"
+                                placeholder="Content.." class="form-control"></textarea></div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary"  (click)="accepter_Conge()" data-bs-dismiss="modal">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>

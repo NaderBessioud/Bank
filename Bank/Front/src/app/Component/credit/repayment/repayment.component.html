@@ -1,0 +1,54 @@
+<div class="animated fadeIn">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <i class="fa fa-align-justify"></i> Combined All Table
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered table-striped table-sm">
+              <thead>
+                <tr>
+                    <th >terme</th>
+                    <th >montant</th>
+                    <th >etat</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let r of listRepayments">
+
+
+
+                    <td>
+                        <a href="#" class="text-gray-600 text-hover-primary mb-1">{{r.term}}</a>
+                    </td>
+
+                    <td>{{r.amount}}</td>
+
+                    <td *ngIf = "r.state">
+                        <span class="badge badge-light-success">Paid</span>
+                    </td>
+                    <td *ngIf = "!r.state">
+                        <span class="badge badge-light-danger">Unpaid</span>
+                    </td>
+
+
+                     <td>
+
+                    </td>
+
+                    <!--end::Action=-->
+                </tr>
+
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!--/.row-->
+  </div>

@@ -1,0 +1,47 @@
+<form id="cc-gen"><input name="csrfmiddlewaretoken" type="hidden"
+    value="XTNjT9v3QRxCXw5j8XMGvgwjeHJuzkjuL70oDWlp1zgZa0gVatWRzA9O9tfGKA1h">
+  
+  
+  
+  <div class="col-4 resp-select">
+    <div class="form-group"><label for="capital">Capital</label><input type="number" class="form-control"
+        id="capital">
+    </div>
+  </div>
+     
+ 
+  <div class="col-4 resp-select">
+    <div class="form-group"><label for="mois">MOIS</label><select class="form-control" id="mois">
+        <option value="48">48</option>
+        <option value="60">60</option>
+      
+      </select></div>
+  </div>
+    <div class="col-4 resp-select">
+        <div class="form-group"><label for="revenu">Revenu Menseul</label><input type="number" class="form-control"
+           id="revenu">
+        </div>
+      </div>
+  
+
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8 mb-w100"><a class="btn btn-success btn-round btn-block btn-lg m-1" id="first-generate"
+        (click)="simulateurPersonnelFixe()"  ><i class="fa fa-cog" id="btn-loader"></i> <b>Simulate</b></a> </div>
+      <div class="col-2"></div>
+    </div>
+  </div>
+  
+  <div>
+   
+  </div>
+  
+  </form>
+
+  <div class="card-footer" style="margin-top: 2%;">
+    <div class="row">
+  <pre style="font-size: large;   font-family: Lucida Console ; font-weight: bold; color: #4dbd74">{{msg}}</pre>
+
+</div>
+</div>

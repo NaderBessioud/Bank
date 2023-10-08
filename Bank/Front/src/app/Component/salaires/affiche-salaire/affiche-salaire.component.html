@@ -1,0 +1,42 @@
+<div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+            <th scope="col">nom</th>
+          <th scope="col">salairebase</th>
+          <th scope="col">dataperception</th>
+          <th scope="col">heuresup</th>
+          <th scope="col">prodheuresup </th>
+          <th scope="col">salairenet </th>
+  
+  
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of listSalaires">
+  
+            <td style="width: 10%;">{{s.employeesal.nom}}</td>
+          <td >{{s.salairebase}}</td>
+          <td>{{s.dataperception}}</td>
+          <td>{{s.heuresup}}</td>
+          <td>{{s.prodheuresup}}</td>
+          <td>{{s.salairenet}}</td>
+  
+  
+          <td>
+
+  
+  
+          </td>
+  
+  
+        </tr>
+  
+      </tbody>
+  
+    </table>
+  
+  
+  
+  
+  </div>

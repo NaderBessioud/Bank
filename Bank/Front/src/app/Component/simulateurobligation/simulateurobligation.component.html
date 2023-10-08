@@ -1,0 +1,74 @@
+
+<section class="section-padding bg-white"> 
+  <h1 class="center">Simuler votre obligation</h1>
+
+  <div class="pos">
+
+<label for="exampleFormControl">   Prix obligation  </label> 
+<br>
+<input  [(ngModel)]="value" >
+<br>
+<br>
+
+<ngx-slider [(value)]="value" [options]="options"  ></ngx-slider>
+<br>
+<br>
+
+<div class="form-group">
+    <label for="exampleFormControlSelect1">Fréquence coupon</label>
+    <select class="form-control" id="exampleFormControlSelect2" [(ngModel)]="value1" name="cb">
+      <option>Annuel</option>
+      <option>Semi-annuel</option>
+      <option>Trimestriel</option>
+      <option>Mensuel</option>
+    </select>
+  </div>
+  <br>
+<br>
+<label for="exampleFormControl">   Taux coupon  </label> 
+<br>
+  <input type="number" [(ngModel)]="value2">
+
+<br>
+<br>
+<ngx-slider [(value)]="value2" [options]="options1"></ngx-slider>
+<br>
+<br>
+<label for="exampleFormControl">   Valeur nominale  </label> 
+<br>
+<input type="number" [(ngModel)]="value3">
+<br>
+<br>
+<ngx-slider [(value)]="value3" [options]="options"></ngx-slider>
+<br>
+<br>
+<label for="exampleFormControl">   Période en nombre d'années </label> 
+<br>
+<input type="number" [(ngModel)]="value4">
+
+<br>
+<br>
+<ngx-slider [(value)]="value4" [options]="options1"></ngx-slider>
+<br>
+<br>
+<button type="button" class="btn btn-block btn-outline-primary" (click)="yield()"  >Calculer</button>
+<br>
+</div>
+<div class="w3-row-padding w3-center w3-small">
+ 
+<div  id="ab">
+<h1 [hidden]="hide"><div id="ab" >Taux de coupon invariable : {{don}} </div></h1>
+<h1 [hidden]="hide"><div >Valeur de l'obligation : {{don1}} </div></h1>
+<h1 [hidden]="hide"><div >Taux de coupon diminue de 2% : {{don2}}</div></h1>
+<h1 [hidden]="hide"><div >Valeur de l'obligation : {{don3}}</div></h1>
+<h1 [hidden]="hide"><div >Total gain : {{don4}}</div></h1>
+<h1 [hidden]="hide"><div >Taux de coupon augmente de 2% : {{don5}}</div></h1>
+<h1 [hidden]="hide"><div >Valeur de l'obligation : {{don6}}</div></h1>
+<h1 [hidden]="hide"><div >Total perte : {{don7}} </div></h1>
+</div>
+</div>
+</section>
+  
+
+ <div id="container"></div>
+

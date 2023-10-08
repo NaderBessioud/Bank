@@ -1,0 +1,271 @@
+
+<ng-template #mymodal1 let-modal1>
+  <div class="center">
+    <form #Formulaire="ngForm">
+      <div class="modal-body">
+
+        <div class="mb-3">
+          <label class="form-label">Carte bancaire</label>
+          <select class="form-select" type="text" name="teamsCarte" #teamsCarte   (change)="onSelectedCarte(teamsCarte.value)" [(ngModel)]="selectedCarte" [ngModelOptions]="{standalone: true}" >
+            <option default>Select carte</option>
+            <option type="text"   *ngFor="let carte of listAllCartebancaire" [value]="carte.idCB">
+              {{carte.nom}}
+            </option>
+          </select>
+        </div>
+
+
+        <br>
+        <button type="button" class="btn btn-danger" (click)="modal1.close('Save click')" >Cancel</button> &nbsp;
+        <button type="submit"  class="btn btn-success" (click)="addComptecourrant(comptecourrant,selectedCarte)"  (click)="modal1.close('Save click')"  (click)="openDialog(mymodal2)"  >Save</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<div style="margin: 50px;padding-bottom: 100px;">
+  <div class="col-2" style="display: inline-block">
+    <input type="text" name="search" class="form-control mb-2" [(ngModel)]= "searchText" placeholder="Search">
+  </div>
+  <div style="display: inline-block;margin-left: 5px;">
+    <button class="btn btn-round btn-sm btn-success" (click)="open(mymodal1)">  Ajouter un nouveau compte courrant</button>
+  </div>
+  <div  class="fix"  style=" border: 0.5px solid grey;background-color: white;padding: 8px;">
+    <th style="width:5%;" (click)="sort('ref')" class="mat-cell">REF<i class="fa fa-sort"></i></th>
+    <th style="width:5%" (click)="sort('rib')" class="mat-cell">RIB<i class="fa fa-sort"></i></th>
+    <th style="width:5%" (click)="sort('solde')" class="mat-cell">Solde DNT<i class="fa fa-sort"></i></th>
+    <th style="width:5%" (click)="sort('carte')" class="mat-cell">carte<i class="fa fa-sort"></i></th>
+
+  </div>
+  <mat-accordion displayMode="flat" [multi]="false" class="mat-table" border="1" class="fix"  >
+
+
+    <mat-expansion-panel *ngFor="let item of listAllComptecourrant | filter:searchText | orderBy: orderHeader: isDescOrder| slice:currentPage3 * pageSize: (currentPage3 + 1) * pageSize"  style=" border: 0.5px solid grey;background-color: white;" (click)="retrieveByCompte(item.idCC)" >
+      <mat-expansion-panel-header class="mat-row" class="accordion" >
+        <span style="width:35%" class="mat-cell">{{item.ref}}</span>
+        <span style="width:35%" class="mat-cell">{{item.rib}}</span>
+        <span style="width:35%" class="mat-cell">{{item.solde}}</span>
+        <span style="width:35%" class="mat-cell">{{item.carteB.nom}}</span>
+
+
+
+      </mat-expansion-panel-header>
+
+
+      <div class="panel" >
+        <div style="text-align: center;font-weight: bolder;margin-top: 5px;margin-bottom: 10px;"> OPERATIONS (DEPOT/RETRAIT/ACHAT)</div>
+        <table class="table table-striped table-bordered table-sm row-border hover"  >
+          <thead>
+          <tr>
+            <th>Type operation</th>
+            <th>Somme DNT</th>
+            <th>Date</th>
+            <th>Immediat</th>
+            <th>Differe</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let operation of listOperationByCompte| slice:currentPage4 * pageSize: (currentPage4 + 1) * pageSize">
+            <td>{{operation.typeoperation}}</td>
+            <td>{{operation.somme}}</td>
+            <td>{{operation.createdAt}}</td>
+            <td>
+              <ng-container *ngIf="operation.typeoperation === 'ACHAT'">
+                <ng-container *ngIf="operation.immediat === true">Oui</ng-container>
+                <ng-container *ngIf="operation.immediat === false">Non</ng-container>
+              </ng-container>
+            </td>
+            <td>
+              <ng-container *ngIf="operation.typeoperation === 'ACHAT'">
+                <ng-container *ngIf="operation.differe === true">Oui</ng-container>
+                <ng-container *ngIf="operation.differe === false">Non</ng-container>
+              </ng-container>
+            </td>
+
+
+
+          </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-primary" (click)="previousPage4()" [disabled]="currentPage4 === 0">Précédent</button> &nbsp;
+        <button class="btn btn-primary" (click)="nextPage4()" [disabled]="currentPage4 >= (listOperationByCompte.length / pageSize) - 1">Suivant</button>
+
+      </div>
+
+
+    </mat-expansion-panel>
+
+
+  </mat-accordion>
+  <div style="margin-left: 380px;margin-top: 20px;">
+    <button class="btn btn-primary" (click)="previousPage3()" [disabled]="currentPage3 === 0">Précédent</button> &nbsp;
+    <button class="btn btn-primary" (click)="nextPage3()" [disabled]="currentPage3 >= (listAllComptecourrant.length / pageSize) - 1">Suivant</button>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- USER
+<div style="margin-top: 50px;">
+  <div style="float: left;margin-left: 50px;width: 50%">
+    <div id="textbox" style="clear: both;margin-bottom: 80px;" >
+      <p class="alignright" style="font-size: 18px;font-weight: bolder" >RIB : {{uncomptecourrant.rib}}</p>
+      <p class="alignleft" style="font-size: 18px;font-weight: bolder;">Solde : {{uncomptecourrant.solde}} DNT</p>
+    </div>
+    <br>
+
+
+    <div class="card text-center" style="width: 700px;height: 542px;">
+      <div class="card-header">
+        Toute vos opérations
+      </div>
+      <div class="card-body">
+    <div  style="display: inline-block">
+      <input type="text" name="search" class="form-control mb-2" [(ngModel)]= "searchText" placeholder="Search">
+    </div>
+    <table class="table table-striped table-bordered table-sm row-border hover"  >
+      <thead>
+      <tr>
+        <th (click)="sort1('Type')">Type  &nbsp;<i class="fa fa-sort"></i></th>
+        <th (click)="sort1('somme')">somme DNT &nbsp;<i class="fa fa-sort"></i></th>
+        <th (click)="sort1('Date')"> Date &nbsp;<i class="fa fa-sort"></i></th>
+        <th (click)="sort1('Immediat')"> Immediat &nbsp;<i class="fa fa-sort"></i></th>
+        <th (click)="sort1('Differe')">Differe &nbsp;<i class="fa fa-sort"></i></th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let operation of listOperationByCompte | filter:searchText | orderBy: orderHeader: isDescOrder| slice:currentPage1 * pageSize: (currentPage1 + 1) * pageSize">
+        <td>{{operation.typeoperation}}</td>
+        <td>{{operation.somme}}</td>
+        <td>{{operation.createdAt| date :'short'}}</td>
+        <td>{{operation.immediat}}</td>
+        <td>{{operation.differe}}</td>
+      </tr>
+      </tbody>
+    </table>
+        <button class="btn btn-primary" (click)="previousPage1()" [disabled]="currentPage1 === 0">Précédent</button> &nbsp;
+        <button class="btn btn-primary" (click)="nextPage1()" [disabled]="currentPage1 >= (listOperationByCompte.length / pageSize) - 1">Suivant</button>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="card text-center" style="float: right;width: 40%;margin-top: 100px;">
+    <div class="card-header">
+      Carte {{unecartebancaire.nom}}
+    </div>
+    <div class="card-body">
+
+    <div id="textbox" style="clear: both;">
+      <p class="alignleft">Pirx</p>
+      <p class="alignright">{{unecartebancaire.prix}} DNT</p>
+    </div>
+
+    <div id="textbox" style="clear: both;">
+      <p class="alignleft">Palfond Retrait/Semaine</p>
+      <p class="alignright">{{currentRetrait}}/{{unecartebancaire.plafondsemaine_retrait}} DNT</p>
+    </div>
+
+    <div id="textbox" style="clear: both;">
+      <p class="alignleft">Palfond Paiement/Mois</p>
+      <p class="alignright">{{currentPaiement}}/{{unecartebancaire.plafondmois_paiement}} DNT</p>
+    </div>
+
+
+    <div id="textbox" style="clear: both;">
+      <p class="alignleft">Debit</p>
+
+     <div class="alignright">
+    <div *ngIf="unecartebancaire.debit_immediat == true;else elseBlock1">Immediat</div>
+    <ng-template #elseBlock1></ng-template>
+    <div *ngIf="unecartebancaire.debit_differe == true;else elseBlock2">differe</div>
+    <ng-template #elseBlock2></ng-template>
+     </div>
+  </div>
+</div>
+  </div>
+<br>
+
+
+<div style="float: right">
+<div class="card text-center" style="width: 500px;height: 300px;">
+  <div class="card-header">
+    Les operations du mois
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">
+      <div style="width: 400px;height: 300px;">
+        <canvas id="myChart"></canvas>
+      </div>
+    </h5>
+
+  </div>
+</div>
+</div>
+
+
+<div class="card text-center" style="width: 1250px;height: 300px;">
+  <div class="card-header">
+    Les operations à venir
+  </div>
+  <div class="card-body">
+    <div  style="display: inline-block">
+      <input type="text" name="search" class="form-control mb-2" [(ngModel)]= "searchText1" placeholder="Search">
+    </div>
+<table class="table table-striped table-bordered table-sm row-border hover">
+  <tr>
+    <th (click)="sort1('Type')">Type</th>
+    <th (click)="sort1('Somme DNT')">Somme DNT</th>
+    <th (click)="sort1('Date')">Date</th>
+    <th (click)="sort1('Immediat')">Immediat</th>
+    <th (click)="sort1('Differe')">Differe</th>
+  </tr>
+  <tr *ngFor="let operationAvenir of listOperationAVenir| filter:searchText1 | orderBy: orderHeader1: isDescOrder1| slice:currentPage2 * pageSize: (currentPage2 + 1) * pageSize">
+    <td>{{operationAvenir.typeoperation}}</td>
+    <td>{{operationAvenir.somme}}</td>
+    <td>{{operationAvenir.createdAt| date :'short'}}</td>
+    <td>{{operationAvenir.immediat}}</td>
+    <td>{{operationAvenir.differe}}</td>
+  </tr>
+</table>
+    <button class="btn btn-primary" (click)="previousPage2()" [disabled]="currentPage2 === 0">Précédent</button> &nbsp;
+    <button class="btn btn-primary" (click)="nextPage2()" [disabled]="currentPage2 >= (listOperationAVenir.length / pageSize) - 1">Suivant</button>
+
+  </div>
+</div>
+-->
+
+<!-- OPERATION
+<button class="btn btn-round btn-sm btn-success" (click)="open(mymodal2)">Achat</button>
+<button class="btn btn-round btn-sm btn-success" (click)="open(mymodal3)">Retrait</button>
+<button class="btn btn-round btn-sm btn-success" (click)="open(mymodal4)">Depot</button>
+
+
+
+
+<ng-template #mymodal4 let-modal4>
+<form #Formulaire="ngForm">
+  <input type="number" name="sommeDepot" class="form-control" placeholder="Somme Depot" [(ngModel)]="Operationbancaire.somme" [ngModelOptions]="{standalone: true}">
+  <button type="submit"  class="btn btn-success" (click)="addDepot(Operationbancaire,uncomptecourrant.idCC)"  >Save</button>
+</form>
+</ng-template>>
+<ng-template #mymodal3 let-modal3>
+<form #Formulaire1="ngForm">
+  <input type="number" name="sommeRetrait" class="form-control" placeholder="Somme Retrait" [(ngModel)]="Operationbancaire.somme" [ngModelOptions]="{standalone: true}">
+  <button type="submit"  class="btn btn-success" (click)="addRetrait(Operationbancaire,uncomptecourrant.idCC)"  >Save</button>
+</form>
+</ng-template>
+
+<ng-template #mymodal2 let-modal2>
+<form #Formulaire1="ngForm">
+  <input type="number" name="sommeAchat" class="form-control" placeholder="Somme Achat" [(ngModel)]="Operationbancaire.somme" [ngModelOptions]="{standalone: true}">
+  <button type="submit"  class="btn btn-success" (click)="addAchat(Operationbancaire,uncomptecourrant.idCC)"  >Save</button>
+</form>
+</ng-template>
+-->

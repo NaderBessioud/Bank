@@ -1,0 +1,139 @@
+<div>
+  <h1>Ajouter Formation</h1>
+  <button type="button" class="btn btn-success" (click)="passetoajouter()">ajouter</button>
+</div>
+
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+
+        <th scope="col">titre</th>
+        <th scope="col">description</th>
+        <th scope="col">heure</th>
+        <th scope="col">nbrparticipant </th>
+        <th scope="col">date </th>
+
+        <th scope="col">delete </th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let f of listFormations">
+
+        <td style="width: 10%;">{{f.titre}}</td>
+        <td>{{f.description}}</td>
+        <td>{{f.heure}}</td>
+        <td>{{f.nbrparticipant}}</td>
+        <td>{{f.date}}</td>
+
+
+        <td>
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            (click)="IdFormationChoix(f.idFormation)">
+            affecter
+          </button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModald"
+            (click)="getFormationByiD(f.idFormation)">
+            Details
+          </button>
+          <button class="btn btn-warning" (click)="modifierFormation(f.idFormation)">
+            modifier
+          </button>
+          <button class="btn btn-danger" (click)="supprimerFormation(f.idFormation)">
+            delete
+          </button>
+          <!-- Button trigger modal -->
+
+
+
+
+
+
+
+
+
+
+
+        </td>
+
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">Options</label>
+            <select class="form-select" id="inputGroupSelect01" [(ngModel)]="type">
+              <option selected>Choose...</option>
+              <option value="GESTIONNAIRE_CLIENTELE">GESTIONNAIRE CLIENTELE</option>
+              <option value="GESTIONNAIRE_PATRIMOINE">GESTIONNAIRE PATRIMOINE</option>
+              <option value="CONSEILLER">CONSEILLER</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="affecter_formation()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="exampleModald" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Formation Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h2>{{for1.titre}}</h2>
+          <h2>{{for1.description}}</h2>
+          <h2>{{for1.date}}</h2>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Prenom/th>
+                <th>Role</th>
+                <th>Telephone</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let u of for1.users">
+                <td>{{u.nom}}</td>
+                <td>{{u.prenom}}</td>
+                <td>{{u.role}}</td>
+                <td><span class="badge badge-success">{{u.telephone}}</span></td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

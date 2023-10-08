@@ -1,0 +1,181 @@
+
+<style>
+  /* Sortable table demo */
+
+th[sortable] {
+cursor: pointer;
+user-select: none;
+-webkit-user-select: none;
+}
+
+th[sortable].desc:before,
+th[sortable].asc:before {
+content: '';
+display: block;
+background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAmxJREFUeAHtmksrRVEUx72fH8CIGQNJkpGUUmakDEiZSJRIZsRQmCkTJRmZmJgQE0kpX0D5DJKJgff7v+ru2u3O3vvc67TOvsdatdrnnP1Y///v7HvvubdbUiIhBISAEBACQkAICAEhIAQ4CXSh2DnyDfmCPEG2Iv9F9MPlM/LHyAecdyMzHYNwR3fdNK/OH9HXl1UCozD24TCvILxizEDWIEzA0FcM8woCgRrJCoS5PIwrANQSMAJX1LEI9bqpQo4JYNFFKRSvIgsxHDVnqZgIkPnNBM0rIGtYk9YOOsqgbgepRCfdbmFtqhFkVEDVPjJp0+Z6e6hRHhqBKgg6ZDCvYBygVmUoEGoh5JTRvIJwhJo1aUOoh4CLPMyvxxi7EWOMgnCGsXXI1GIXlZUYX7ucU+kbR8NW8lh3O7cue0Pk32MKndfUxQFAwxdirk3fHappAnc0oqDPzDfGTBrCfHP04dM4oTV8cxr0SVzH9FF07xD3ib6xCDE+M+aUcVygtWzzbtGX2rPBrEUYfecfQkaFzYi6HjVnGBdtL7epqAlc1+jRdAap74RrnPc4BCijttY2tRcdN0g17w7HqZrXhdJTYAuS3hd8z+vKgK3V1zWPae0mZDMykadBn1hTQBLnZNwVrJpSe/NwEeDsEwCctEOsJTsgxLvCqUl2ACftEGvJDgjxrnBqkh3ASTvEWrIDQrwrnJpkB3DSDrGW7IAQ7wqnJtkBnLRztejXXVu4+mxz/nQ9jR1w5VB86ejLTFcnnDwhzV+F6T+CHZlx6THSjn76eyyBIOPHyDakhBAQAkJACAgBISAEhIAQYCLwC8JxpAmsEGt6AAAAAElFTkSuQmCC')
+  no-repeat;
+background-size: 22px;
+width: 22px;
+height: 22px;
+float: left;
+margin-left: -22px;
+}
+
+th[sortable].desc:before {
+transform: rotate(180deg);
+-ms-transform: rotate(180deg);
+}
+
+/* Filtering table demo */
+ngbd-table-filtering span.ngb-highlight {
+background-color: yellow;
+}
+
+/* Complete table demo */
+ngbd-table-complete span.ngb-highlight {
+background-color: yellow;
+}
+
+ngb-carousel .picsum-img-wrapper {
+position: relative;
+height: 0;
+padding-top: 55%; /* Keep ratio for 900x500 images */
+}
+
+ngb-carousel .picsum-img-wrapper > img {
+position: absolute;
+top: 0;
+left: 0;
+bottom: 0;
+right: 0;
+}
+
+</style>
+
+ 
+   
+ 
+
+ 
+ 
+
+ <br>
+ <br>
+ <br>
+
+
+<div class="form-group">
+<input
+type="text"
+class="form-control"
+placeholder="Search..."
+[(ngModel)]="filterTerm"
+/>
+</div>
+<div class="table-responsive">
+<table class="table">
+<tr class="table-row-1">
+ <th  data-order="desc" data-name="idDemande" scope="col">ID</th>
+ <th  data-order="desc" data-name="Statut" scope="col">Statut </th>
+ <th  data-order="desc" data-name="CompteBancaire" scope="col">CompteBancaire </th>
+ 
+ <th>Actions</th>
+</tr>
+<tr *ngFor = "let p of demandes | filter: filterTerm | paginate
+: {
+   itemsPerPage: tableSize,
+   currentPage: page,
+   totalItems: count
+ };
+let i = index
+">
+ <td class="lw-table-data-2">
+   {{ p.iddemande }}
+ </td>
+ <td class="lw-table-data-2">
+   {{ p.statut }}
+ </td>
+ <td class="lw-table-data-3">
+   {{ p.comptebancaire.idCBA }}
+ </td>
+
+  
+ 
+            
+         
+    
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Create</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+           
+            <div class="form-group">
+              <label> Libelle </label>
+              <input type="text" class ="form-control" id = "libelle"
+                     [(ngModel)] = "Comptetitre.libelle" name = "libelle">
+            </div>
+
+            <div class="form-group">
+              <label> Frais Courtage</label>
+              <input type="text" class ="form-control" id = "fraiscourtage"
+                     [(ngModel)] = "Comptetitre.fraiscourtage" name = "fraiscourtage">
+            </div>
+            <div class="form-group">
+              <label> Frais Tenu</label>
+              <input type="text" class ="form-control" id = "fraistenu"
+                     [(ngModel)] = "Comptetitre.fraistenu" name = "fraistenu">
+            </div>
+            <div class="form-group">
+              <label> Frais OPCVM</label>
+              <input type="text" class ="form-control" id = "fraisOPCVM"
+                     [(ngModel)] = "Comptetitre.fraisOPCVM" name = "fraisOPCVM">
+            </div>
+            <div class="form-group">
+                <label> RIB Compte Bancaire </label>
+                <input type="text" class ="form-control"   name="id"
+                        value="{{p.comptebancaire.idCBA}}"  disabled>
+                        
+              </div>
+            </div>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="addComptetitre(Comptetitre,p.comptebancaire.idCBA)" (click)="statedem(p.iddemande)" (click)="modal.close('Save click')" >Save</button>
+      </div>
+    </ng-template>
+    
+    <button class="btn btn-lg btn-outline-success" (click)="open(content)">Validate</button>
+    
+   
+        
+
+      </tr>
+
+    </table>
+    <div class="d-flex justify-content-center">
+      <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        (pageChange)="onTableDataChange($event)"
+      >
+      </pagination-controls>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+

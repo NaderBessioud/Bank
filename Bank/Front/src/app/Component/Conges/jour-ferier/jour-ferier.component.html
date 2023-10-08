@@ -1,0 +1,46 @@
+<div>
+    <div class="col-4 resp-select">
+        <div class="form-group"><label for="country">Country</label><select [(ngModel)]="country" class="form-control" id="country">
+            <option value="TN">TN</option>
+            <option value="US">US</option>
+           
+          
+          </select></div>
+      </div>
+      <button (click)="getholiday()">afficher</button>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <table class="data-table table hover multiple-select-row nowrap dataTable no-footer dtr-inline collapsed"
+            id="DataTables_Table_1" role="grid" aria-describedby="DataTables_Table_1_info">
+            <thead>
+                <tr role="row">
+
+                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"
+                        aria-label="Age: activate to sort column ascending">name</th>
+                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"
+                        aria-label="Office: activate to sort column ascending">Date</th>
+                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"
+                        aria-label="Address: activate to sort column ascending">Jour</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr role="row" class="odd"
+                    *ngFor="let f of holi ">
+
+                    <td class="table-plus sorting_1" tabindex="0">{{f.name}}</td>
+                    <td>{{f.date}}</td>
+                    <td>{{f.week_day}}</td>
+                    
+                    
+                </tr>
+                
+
+            </tbody>
+        </table>
+    </div>
+</div>
+

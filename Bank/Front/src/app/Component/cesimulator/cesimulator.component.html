@@ -1,0 +1,209 @@
+<div style="display: flex">
+
+  <div class="simulator" style="border: outset grey;width: 50%; border-radius: 10%; ">
+    <h2 class="h2-simulator">
+
+      <span class="title-wrapper" style="margin-left: 15px;"> Your saving details</span>
+    </h2>
+    <div style="display: flex">
+      <div>
+      <label style="margin-left: 15px;text-align: center;font-family: bold">Type</label>
+      <br>
+      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" [(ngModel)]="type"  name="type" style="margin-left: 15px">
+        <option selected value="LIVRET_A">LIVRET_A</option>
+        <option value="LEP">LEP</option>
+        <option value="LDDS">LDDS</option>
+        <option value="LIVRET_JEUNE">LIVRET_JEUNE</option>
+      </select>
+      </div>
+
+      <img src="../../../assets/img/detail.png" style="width: 3%; height: 3%;margin-top: 30px;margin-left: 10px" (click)="getDetail()">
+    </div>
+    <br>
+    <div style="display: flex;margin-left: 15px">
+      <div >
+        <label for="mens" style="display:flex;flex-direction:column;text-align: center;font-family: bold">Dépôt initial</label>
+
+        <input  id="mens" type="text" style="display:flex;flex-direction:column;width: 100px" [(ngModel)]="init" name="init">
+      </div>
+
+
+      <div style="margin-left: 50px">
+        <label for="init" style="display:flex;flex-direction:column;text-align: center;font-family: bold">contribution</label>
+
+        <input type="text" id="init" style="display:flex;flex-direction:column;width: 100px" [(ngModel)]="mens" name="mens">
+      </div>
+
+      <div style="margin-left: 50px" >
+        <label style="display:flex;flex-direction:column;text-align: center;font-family: bold">Fréquence de dépôt </label>
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" [(ngModel)]="typeV" name="typeV" style="margin-left: 15px">
+          <option selected value="annuel">annuel</option>
+          <option value="mensuel">mensuel</option>
+          <option value="semestriel">semestriel</option>
+
+        </select>
+      </div>
+    </div>
+    <br>
+    <label style="margin-left: 15px ;text-align: center;font-family: bold">Periode</label>
+    <p style="margin-left: 15px"><input type="text" [(ngModel)]="periode" name="periode" style="width: 60px">
+    <ngx-slider [(value)]="periode" [options]="options"  style="width: 80%;margin-left: 15px"></ngx-slider></p>
+<div style="margin-left: 30px;margin-top: 30px;margin-bottom: 30px">
+    <div class="form-check form-check-inline" >
+      <input class="form-check-input" type="radio" name="typeP" id="inlineRadio1" value="mois" [(ngModel)]="typeP">
+      <label class="form-check-label" for="inlineRadio1"><h4>mois</h4></label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="typeP" id="inlineRadio2" value="annees" [(ngModel)]="typeP">
+      <label class="form-check-label" for="inlineRadio2"><h4>années</h4></label>
+    </div>
+</div>
+
+    <div style="text-align: center">
+      <button class="btn btn-success" (click)="simulate()">Simulate</button>
+    </div>
+
+  </div>
+
+
+  <div class="result" style="border: outset grey;width: 50%; border-radius: 10%;;float: right;margin-left: 20px ">
+    <h2 class="h2-result">
+
+      <span class="title-wrapper" style="margin-left: 15px;">
+Répartition des économies totales </span>
+    </h2>
+
+    <div style="display: inline">
+    <div  style="float: left;width: 200px;margin-top:40px">
+
+      <div id="chartContainer" style="height: 250px; width: 100%; margin:auto;"></div>
+    </div>
+<div style="float: right">
+  <table class="Table Table--numerical Table--borderedRows>">
+    <tbody>
+    <tr>
+      <td colspan="3">
+
+        <h6 class="heading-secondry text-size-md mb-0">
+
+       Total saving breakdown
+        </h6>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width: 20px !important">
+        <div class="square-block fill-color-a"></div>
+
+      </td>
+      <td class="text-left"> Intérêts gagnés</td>
+      <td class="text-right">
+      <strong class="type-body-two text-size-md" >
+        $ {{interestE}}
+      </strong>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="square-block fill-color-b"></div>
+      </td>
+      <td class="text-left"> Contrubition totale</td>
+      <td class="text-right">
+        <strong class="type-body-two text-size-md">
+          $ {{contubition}}
+        </strong>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <div class="square-block fill-color-c"></div>
+      </td>
+      <td class="text-left"> Depot Initial</td>
+      <td class="text-right">
+        <strong class="type-body-two text-size-md">
+          $ {{init}}
+        </strong>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="text-right" style="margin-right: 20px">
+    <div class="mb-5" style="margin-right: 28px">
+      <strong style="text-size:5em">Your total saving</strong>
+    </div>
+    <div class="Numeral text-4xl sm:text-7xl">
+      <span class="Numeral-accent">$</span>
+      {{res}}
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+  </div>
+
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Detaills</h4>
+        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <p>{{typedetails}}</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success"  (click)="primaryModal.hide()" >OK</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
+<div bsModal #primaryModal1="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Attention</h4>
+        <button type="button" class="close" (click)="primaryModal1.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <p>{{error1}}{{type}}{{error2}}</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success"  (click)="primaryModal1.hide()" >OK</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+

@@ -1,0 +1,57 @@
+<div class="yassin">
+    <h4>Vous voulez comparer cette obligation avec une autre ?</h4>
+    <br>
+    <div class="form-group">
+        <h6 for="exampleFormControlSelect1">Choisissez la quelle :</h6>
+        <select class="form-control" id="exampleFormControlSelect2" [(ngModel)]="ido" >
+          <option *ngFor="let p of obligations" value="{{p.idO}}">{{p.emetteur}} {{p.description}}</option>
+        </select>
+      </div>
+      
+      <button type="button"  class="btn btn-block btn-outline-primary"  (click)="comparer(Obligation.idO)">Comparer</button>
+      <br>
+      <h4>Ou bien, Vous voulez simuler votre obligation ?</h4>
+      <br>
+      <button class="btn btn-block btn-outline-primary" routerLink="/simulateur"
+      >Par içi</button>
+      </div>
+<section class="section-padding bg-white"> 
+   
+    <div class="container">
+        <br>
+       
+       
+                    <!-- article -->
+                    <article class="post">
+                        <div class="post-wrapper">
+                            <div class="blog-img animate-img mb-xl-20">
+                                <a href="#">
+                                    <img [src]="Obligation.imageob" class="image-fit" alt="{{Obligation.imageob}}"  >
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Emetteur : {{Obligation.emetteur}}</h5>
+                                <h5 class="card-title">Valeur Nominale : {{Obligation.vn}}</h5>
+                               <h5 class="card-title">Coupon : {{Obligation.coupon}}</h5>
+                               <h5 class="card-title">Cours : {{Obligation.cours}}</h5>
+                               <h5 class="card-title">Description : {{Obligation.description}}</h5>
+                               <h5 class="card-title">Prix Rembourssement : {{Obligation.prixrembourssement}}</h5>
+                               <h5 class="card-title">Prix Emission : {{Obligation.prixemission}}</h5>
+                               <h5 class="card-title">Maturite : {{Obligation.maturite}}</h5>
+                               <h5 class="card-title">Date Emission : {{Obligation.dateemission}}</h5>
+                               <a href="#" class="btn btn-outline-primary" routerLink="/obfr"
+                                >Back</a>
+                              </div>
+                              
+                                </div>
+                               
+                                </article>
+                               
+                 
+     
+</div> 
+</section>
+ 
+
+
+

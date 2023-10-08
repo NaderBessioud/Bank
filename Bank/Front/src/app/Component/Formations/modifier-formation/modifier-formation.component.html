@@ -1,0 +1,46 @@
+<div>
+    <form>
+        <div class="mb-3">
+            <label for="titre" class="form-label">Titre</label>
+            <input type="text" class="form-control" id="titre" [(ngModel)]="formation.titre" name="titre"
+                #titre="ngModel">
+
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="description" [(ngModel)]="formation.description"
+                name="description" #description="ngModel">
+        </div>
+        <div class="mb-3">
+            <label for="heure" class="form-label">Heure</label>
+            <input type="number" class="form-control" id="heure" [(ngModel)]="formation.heure" name="heure"
+                #heure="ngModel">
+        </div>
+        <div class="mb-3">
+            <label for="nbrparticipant" class="form-label">Nbr Participant</label>
+            <input type="number" class="form-control" id="nbrparticipant" [(ngModel)]="formation.nbrparticipant"
+                name="nbrparticipant" #nbrparticipant="ngModel">
+        </div>
+
+        <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+           <input type="date" class="form-control" id="date" [(ngModel)]="formation.date" name="date" #date="ngModel">
+           
+              
+        
+                        
+        </div>
+
+
+
+
+        <button type="submit" class="btn btn-primary" (click)="updateEvent(id)">modifier</button>
+        <button type="submit" class="btn btn-danger" (click)="retour()"> Retour</button>
+    </form>
+
+</div>
+
+
+
+
+

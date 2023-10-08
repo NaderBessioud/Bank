@@ -1,0 +1,114 @@
+<div class="animated fadeIn">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <i class="fa fa-align-justify"></i> Combined All Table
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered table-striped table-sm">
+              <thead>
+                <tr>
+                    <th >Nom du client</th>
+                    <th >Montant</th>
+                    <th >Offer</th>
+                    <th >taux d'intéret</th>
+                    <th >Date de création</th>
+                    <th >Statut</th>
+                    <th >Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let c of listCredits">
+
+
+                    <td>
+                        <a href="../../demo1/dist/apps/customers/view.html" class="text-gray-800 text-hover-primary mb-1">{{ c.clientcr.prenom}}</a>
+                    </td>
+
+                    <td>
+                        <a href="#" class="text-gray-600 text-hover-primary mb-1">{{c.amount}}</a>
+                    </td>
+
+                    <td>{{c.offer.name}}</td>
+
+                    <td>{{c.offer.interestRate}}%</td>
+
+                    <td>{{c.startDate}}</td>
+                    <td *ngIf = "c.state === 'ACCEPTED'">
+                        <span class="badge badge-light-success">Accepted</span>
+                    </td>
+                    <td *ngIf = "c.state === 'REJECTED'">
+                        <span class="badge badge-light-warning">REJECTED</span>
+                    </td>
+                    <td *ngIf = "c.state === 'WAITING'">
+                        <span class="badge badge-light-info">WAITING</span>
+                    </td>
+                    <td *ngIf = "c.state === 'FRAUD'">
+                        <span class="badge badge-light-danger">FRAUD</span>
+                    </td>
+
+                     <td>
+                        <div class="d-flex justify-content-end flex-shrink-0">
+                            <a *ngIf = "c.state === 'WAITING'"  (click)="accept(c.id)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                <span class="svg-icon svg-icon-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="green"/>
+                                        <path d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z" fill="black"/>
+                                        </svg>
+
+                                </span>
+                                <!--end::Svg Icon-->
+                            </a>
+                            <a *ngIf = "c.state === 'WAITING'"  (click)="reject(c.id)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
+                                <span class="svg-icon svg-icon-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black"/>
+                                        <rect x="7" y="15.3137" width="12" height="2" rx="1" transform="rotate(-45 7 15.3137)" fill="black"/>
+                                        <rect x="8.41422" y="7" width="12" height="2" rx="1" transform="rotate(45 8.41422 7)" fill="black"/>
+                                        </svg>
+
+                                </span>
+                                <!--end::Svg Icon-->
+                            </a>
+                            <a  *ngIf = "c.state === 'FRAUD' || c.state === 'REJECTED'  " (click)="delete(c.id)"  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
+                                <span class="svg-icon svg-icon-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"></path>
+                                        <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"></path>
+                                        <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"></path>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </a>
+                            <a  *ngIf = "c.state === 'ACCEPTED'" routerLink="/credit/repayment/{{c.id}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                <span class="svg-icon svg-icon-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M21.7 18.9L18.6 15.8C17.9 16.9 16.9 17.9 15.8 18.6L18.9 21.7C19.3 22.1 19.9 22.1 20.3 21.7L21.7 20.3C22.1 19.9 22.1 19.3 21.7 18.9Z" fill="black"/>
+                                        <path opacity="0.3" d="M11 20C6 20 2 16 2 11C2 6 6 2 11 2C16 2 20 6 20 11C20 16 16 20 11 20ZM11 4C7.1 4 4 7.1 4 11C4 14.9 7.1 18 11 18C14.9 18 18 14.9 18 11C18 7.1 14.9 4 11 4ZM8 11C8 9.3 9.3 8 11 8C11.6 8 12 7.6 12 7C12 6.4 11.6 6 11 6C8.2 6 6 8.2 6 11C6 11.6 6.4 12 7 12C7.6 12 8 11.6 8 11Z" fill="black"/>
+                                        </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </a>
+
+                        </div>
+                    </td>
+
+                    <!--end::Action=-->
+                </tr>
+
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!--/.row-->
+  </div>

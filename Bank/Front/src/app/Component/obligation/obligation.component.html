@@ -1,0 +1,364 @@
+
+
+<style>
+  /* Sortable table demo */
+
+th[sortable] {
+cursor: pointer;
+user-select: none;
+-webkit-user-select: none;
+}
+
+th[sortable].desc:before,
+th[sortable].asc:before {
+content: '';
+display: block;
+background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAmxJREFUeAHtmksrRVEUx72fH8CIGQNJkpGUUmakDEiZSJRIZsRQmCkTJRmZmJgQE0kpX0D5DJKJgff7v+ru2u3O3vvc67TOvsdatdrnnP1Y///v7HvvubdbUiIhBISAEBACQkAICAEhIAQ4CXSh2DnyDfmCPEG2Iv9F9MPlM/LHyAecdyMzHYNwR3fdNK/OH9HXl1UCozD24TCvILxizEDWIEzA0FcM8woCgRrJCoS5PIwrANQSMAJX1LEI9bqpQo4JYNFFKRSvIgsxHDVnqZgIkPnNBM0rIGtYk9YOOsqgbgepRCfdbmFtqhFkVEDVPjJp0+Z6e6hRHhqBKgg6ZDCvYBygVmUoEGoh5JTRvIJwhJo1aUOoh4CLPMyvxxi7EWOMgnCGsXXI1GIXlZUYX7ucU+kbR8NW8lh3O7cue0Pk32MKndfUxQFAwxdirk3fHappAnc0oqDPzDfGTBrCfHP04dM4oTV8cxr0SVzH9FF07xD3ib6xCDE+M+aUcVygtWzzbtGX2rPBrEUYfecfQkaFzYi6HjVnGBdtL7epqAlc1+jRdAap74RrnPc4BCijttY2tRcdN0g17w7HqZrXhdJTYAuS3hd8z+vKgK3V1zWPae0mZDMykadBn1hTQBLnZNwVrJpSe/NwEeDsEwCctEOsJTsgxLvCqUl2ACftEGvJDgjxrnBqkh3ASTvEWrIDQrwrnJpkB3DSDrGW7IAQ7wqnJtkBnLRztejXXVu4+mxz/nQ9jR1w5VB86ejLTFcnnDwhzV+F6T+CHZlx6THSjn76eyyBIOPHyDakhBAQAkJACAgBISAEhIAQYCLwC8JxpAmsEGt6AAAAAElFTkSuQmCC')
+  no-repeat;
+background-size: 22px;
+width: 22px;
+height: 22px;
+float: left;
+margin-left: -22px;
+}
+
+th[sortable].desc:before {
+transform: rotate(180deg);
+-ms-transform: rotate(180deg);
+}
+
+/* Filtering table demo */
+ngbd-table-filtering span.ngb-highlight {
+background-color: yellow;
+}
+
+/* Complete table demo */
+ngbd-table-complete span.ngb-highlight {
+background-color: yellow;
+}
+
+ngb-carousel .picsum-img-wrapper {
+position: relative;
+height: 0;
+padding-top: 55%; /* Keep ratio for 900x500 images */
+}
+
+ngb-carousel .picsum-img-wrapper > img {
+position: absolute;
+top: 0;
+left: 0;
+bottom: 0;
+right: 0;
+}
+
+</style>
+
+
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">ADD</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+          </div>
+          <div class="modal-body">
+            <form #f="ngForm">
+              <div class="mb-3">
+                <div class="form-group">
+                  <label>  Prix D'émission </label>
+                  <input type="text" class ="form-control" id = "prixemission"
+                                 [(ngModel)] = "Obligation.prixemission" name = "prixemission"  required ngModel #l="ngModel">
+                        </div>
+                        <div class="alert alert-danger" *ngIf="l.invalid && l.touched" >Champs obligatoire</div>
+                        <div class="form-group">
+                          <label> Valeur Nominale</label>
+                          <input type="text" class ="form-control" id = "vn"
+                                 [(ngModel)] = "Obligation.vn" name = "vn" required ngModel #a="ngModel">
+                        </div>
+                        <div class="alert alert-danger" *ngIf="a.invalid && a.touched" >Champs obligatoire</div>
+                        <div class="form-group">
+                          <label> Maturite</label>
+                          <input type="text" class ="form-control" id = "maturite"
+                                 [(ngModel)] = "Obligation.maturite" name = "maturite" required ngModel #b="ngModel">
+                        </div>
+                        <div class="alert alert-danger" *ngIf="b.invalid && b.touched" >Champs obligatoire</div>
+                        <div class="form-group">
+                          <label> Coupon</label>
+                          <input type="text" class ="form-control" id = "coupon"
+                                 [(ngModel)] = "Obligation.coupon" name = "coupon" required ngModel #c="ngModel">
+                        </div>
+                        <div class="alert alert-danger" *ngIf="c.invalid && c.touched" >Champs obligatoire</div>
+                        <div class="form-group">
+                          <label> Prix Rembourssement</label>
+                          <input type="text" class ="form-control" id = "prixrembourssement"
+                                 [(ngModel)] = "Obligation.prixrembourssement" name = "prixrembourssement" required ngModel #d="ngModel">
+                        </div>
+                        <div class="alert alert-danger" *ngIf="d.invalid && d.touched" >Champs obligatoire</div>
+                          <div class="form-group">
+                            <label> Cours</label>
+                            <input type="text" class ="form-control" id = "cours"
+                                   [(ngModel)] = "Obligation.cours" name = "cours" required ngModel #e="ngModel">
+                          </div>
+                          <div class="alert alert-danger" *ngIf="e.invalid && e.touched" >Champs obligatoire</div>
+                          <div class="form-group">
+                            <label> Emetteur</label>
+                            <input type="text" class ="form-control" id = "emetteur"
+                                   [(ngModel)] = "Obligation.emetteur" name = "emetteur" required ngModel #f="ngModel">
+                          </div>
+                          <div class="alert alert-danger" *ngIf="f.invalid && f.touched" >Champs obligatoire</div>
+                          <div class="form-group">
+                            <label> Description</label>
+                            <input type="text" class ="form-control" id = "description"
+                                   [(ngModel)] = "Obligation.description" name = "description" required ngModel #g="ngModel">
+                          </div>
+                          <div class="alert alert-danger" *ngIf="g.invalid && g.touched" >Champs obligatoire</div>
+                          <div class="form-group">
+                            <label> Frequence </label>
+                           
+                           
+                            <select class="form-control" id="exampleFormControlSelect2" [(ngModel)] = "Obligation.frequencecoupon" name = "frequencecoupon" >
+                              <option value="Annuel">Annuel</option>
+                              <option value="Semi-annuel">Semi-annuel</option>
+                              <option value="Trimestriel">Trimestriel</option>
+                              <option value="Mensuel">Mensuel</option>
+                            </select>
+                                  
+                          </div>
+                          <label class="text-custom-black fs-14 fw-600">url image</label>
+                          <div>
+                          <input type="file" (change)="onFileChanged($event)" required ngModel #h="ngModel">
+                          </div>
+                          <div class="alert alert-danger" *ngIf="h.invalid && h.touched" >Champs obligatoire</div>
+
+               
+ 
+                </div>
+              
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="addob(Obligation)" (click)="modal.close('Save click')" [disabled]="f.invalid" >Save</button>
+          </div>
+        </ng-template>
+        
+        <button class="btn btn-lg btn-outline-danger" (click)="download()"  >PDF</button>
+        <br>
+      <br>
+        <button class="btn btn-lg btn-outline-primary" (click)="open(content)">ADD Obligation</button>
+        <br>
+      
+        <br>
+        <input  type="file" id="customFile" (change)="selectFile($event)">
+        <button class="btn btn-lg btn-outline-success"  (click)="upload()">Import from csv file</button>
+        
+       
+      
+        
+       
+        
+
+        
+       
+        <br>
+        <br>
+        <br>
+
+
+<div class="form-group">
+<input
+type="text"
+class="form-control"
+placeholder="Search..."
+[(ngModel)]="filterTerm"
+/>
+</div>
+<div class="table-responsive">
+    <table class="table">
+      <thead>
+      <tr class="table-row-1">
+        <th  data-order="desc" data-name="idO" scope="col"> ID </th>
+        <th  data-order="desc" data-name="prixemission" scope="col"> Prix D'émission </th>
+        <th  data-order="desc" data-name="vn" scope="col"> Valeur Nominale </th>
+        <th  data-order="desc" data-name="maturite" scope="col"> Maturite </th>
+        <th  data-order="desc" data-name="coupon" scope="col"> Coupon </th>
+        <th  data-order="desc" data-name="frequencecoupon" scope="col">Frequence coupon</th>
+        <th  data-order="desc" data-name="cours" scope="col">Cours </th>
+        <th  data-order="desc" data-name="emetteur" scope="col">Emetteur</th>
+        <th  data-order="desc" data-name="description" scope="col">Description</th>
+        <th  data-order="desc" data-name="description" scope="col">Date Emission</th>
+        <th>Actions</th>
+      </tr>
+      <tr *ngFor = "let p of obligations | filter: filterTerm | paginate
+      : {
+          itemsPerPage: tableSize,
+          currentPage: page,
+          totalItems: count
+        };
+  let i = index
+">
+        <td class="lw-table-data-2">
+          {{ p.idO }}
+        </td>
+        <td class="lw-table-data-2">
+          {{ p.prixemission }}
+        </td>
+        <td class="lw-table-data-3">
+          {{ p.vn }}
+        </td>
+        <td class="lw-table-data-4">
+          {{ p.maturite }}
+        </td>
+        <td class="lw-table-data-5">
+          {{ p.coupon }}
+        </td>
+        <td class="lw-table-data-6">
+            {{ p.frequencecoupon }}
+          </td>
+          <td class="lw-table-data-6">
+            {{ p.cours }}
+          </td>
+          <td class="lw-table-data-6">
+            {{ p.emetteur }}
+          </td>
+          <td class="lw-table-data-6">
+            {{ p.description }}
+          </td>
+          <td class="lw-table-data-6">
+            {{ p.dateemission }}
+          </td>
+
+        <td class="lw-table-data-3 choose-btn">
+          <button class="btn btn-lg btn-outline-primary" (click)="openVerticallyCentered(content1)">View</button>
+          <ng-template #content1 let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">View Compte titre</h4>
+              
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')" >X</button>
+
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <div>
+                    
+                      <div>
+                        <label> <b> Prix Emission : </b></label> {{p.prixemission}}
+                      </div>
+                      <div>
+                        <label> <b> Valeur Nominale : </b></label> {{p.vn}}
+                      </div>
+                      <div>
+                        <label> <b> Maturite : </b></label> {{p.maturite}}
+                      </div>
+                      <div>
+                        <label> <b> Coupon : </b></label> {{p.coupon}}
+                      </div>
+                    <div>
+                      <label> <b> Prix Rembourssement : </b></label> {{p.prixrembourssement}}
+                    </div>
+                    <div>
+                      <label> <b> Cours : </b></label> {{p.cours}}
+                    </div>
+                    <div>
+                      <label> <b> Emetteur : </b></label> {{p.emetteur}}
+                    </div>
+                    <div>
+                      <label> <b> Description : </b></label> {{p.description}}
+                    </div>
+                    <div>
+                      <label> <b> Date Emission : </b></label> {{p.dateemission}}
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+            </div>
+          </ng-template>
+          <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Edit</h4>
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <div class="form-group">
+                    <label>  ID </label>
+                    <input type="text" class ="form-control" id = "idO"
+                                   [(ngModel)] = "p.idO" name = "idO" disabled>
+                          </div>
+  
+                    <div class="form-group">
+                        <label>  Prix D'émission </label>
+                        <input type="text" class ="form-control" id = "prixemission"
+                                       [(ngModel)] = "p.prixemission" name = "prixemission">
+                              </div>
+      
+                              <div class="form-group">
+                                <label> Valeur Nominale</label>
+                                <input type="text" class ="form-control" id = "vn"
+                                       [(ngModel)] = "p.vn" name = "vn">
+                              </div>
+                              <div class="form-group">
+                                <label> Maturite</label>
+                                <input type="text" class ="form-control" id = "maturite"
+                                       [(ngModel)] = "p.maturite" name = "maturite">
+                              </div>
+                              <div class="form-group">
+                                <label> Coupon</label>
+                                <input type="text" class ="form-control" id = "coupon"
+                                       [(ngModel)] = "p.coupon" name = "coupon">
+                              </div>
+                              <div class="form-group">
+                                <label> Prix Rembourssement</label>
+                                <input type="text" class ="form-control" id = "prixrembourssement"
+                                       [(ngModel)] = "p.prixrembourssement" name = "prixrembourssement">
+                              </div>
+                                <div class="form-group">
+                                  <label> Cours</label>
+                                  <input type="text" class ="form-control" id = "cours"
+                                         [(ngModel)] = "p.cours" name = "cours">
+                                </div>
+                                <div class="form-group">
+                                  <label> Emetteur</label>
+                                  <input type="text" class ="form-control" id = "emetteur"
+                                         [(ngModel)] = "p.emetteur" name = "emetteur">
+                                </div>
+                                <div class="form-group">
+                                  <label> Description</label>
+                                  <input type="text" class ="form-control" id = "description"
+                                         [(ngModel)] = "p.description" name = "description">
+                                </div>
+                                
+
+                 
+   
+                  </div>
+                
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="editob(p)" (click)="modal.close('Save click')" >Save</button>
+            </div>
+          </ng-template>
+          
+          <button class="btn btn-lg btn-outline-success" (click)="open(content)">Edit</button>
+          <button class="btn btn-lg btn-outline-danger" (click)="deleteob(p.idO)" >Delete</button>
+         
+              </td>
+
+            </tr>
+          </thead>
+          </table>
+          <br>
+          <div class="d-flex justify-content-center">
+            <pagination-controls
+              previousLabel="Prev"
+              nextLabel="Next"
+              (pageChange)="onTableDataChange($event)"
+            >
+            </pagination-controls>
+          </div>
+
+        </div>
+        

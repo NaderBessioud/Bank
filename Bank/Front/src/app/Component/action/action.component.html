@@ -1,0 +1,299 @@
+<!--
+<div class="center" style="margin-right: 20px;margin-left: 20px;">
+    <form>
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Titre</label>
+        <input type="text" class="form-control" id="exampleFormControlInput" placeholder="Titre" [(ngModel)]="action.titre"  [ngModelOptions]="{standalone : true}">
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Prix unitaire</label>
+        <input type="number" class="form-control" id="exampleFormControlInput1"  placeholder="Prix" [(ngModel)]="action.prix"  [ngModelOptions]="{standalone : true}">
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Nombres d'actions</label>
+        <input type="number" class="form-control" id="exampleFormControlInput2" placeholder="Nombres" [(ngModel)]="action.nombre"  [ngModelOptions]="{standalone : true}">
+      </div>
+
+      <div class="text-right" style="margin-right: 20px">
+        <div class="mb-5" style="margin-right: 28px">
+          <strong style="text-size:5em">Total</strong>
+        </div>
+        <div class="Numeral text-4xl sm:text-7xl">
+          {{action.prix*action.nombre}}
+        </div>
+      </div>
+
+      <br>
+      <div style="margin-left: 20px;margin-bottom: 20px;">
+        <button style="margin-right: 10px;" type="button" class="btn btn-success" (click)="addAction(action)">Ajouter</button>
+      </div>
+    </form>
+  </div>
+ -->
+<div style="display: flex">
+
+  <div class="simulator" style="border: outset grey;width: 50%; border-radius: 10%; ">
+    <h2 class="h2-simulator">
+
+      <span class="title-wrapper" style="margin-left: 15px;"> Ajouter Actions </span>
+    </h2>
+    <div style="display: flex">
+      <div>
+        <label style="margin-left: 15px;text-align: center;font-family: bold">Type</label>
+        <br>
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" [(ngModel)]="action.type"  name="type" style="margin-left: 15px">
+          <option selected value="Ordinaire">Ordinaire</option>
+          <option value="Privilègée">Privilègée</option>
+          <option value="Bons de souscription">Bons de souscription</option>
+        </select>
+      </div>
+
+    </div>
+    <br>
+    <div style="display: flex;margin-left: 15px">
+      <div >
+        <label for="mens" style="display:flex;flex-direction:column;text-align: center;font-family: bold">Nombres d'actions</label>
+
+        <input  id="mens" type="number" style="display:flex;flex-direction:column;width: 100px" placeholder="Nombres" [(ngModel)]="action.nombre" name="init">
+      </div>
+
+
+      <div style="margin-left: 50px">
+        <label for="init" style="display:flex;flex-direction:column;text-align: center;font-family: bold">Prix unitaire</label>
+
+        <input type="number" id="init" style="display:flex;flex-direction:column;width: 100px" placeholder="Prix" [(ngModel)]="action.prix" name="mens">
+      </div>
+
+      <div style="margin-left: 50px">
+        <label for="init" style="display:flex;flex-direction:column;text-align: center;font-family: bold">Titre</label>
+
+        <input type="text" id="init" style="display:flex;flex-direction:column;width: 100px" placeholder="Titre" [(ngModel)]="action.titre" name="mens">
+      </div>
+
+
+    </div>
+    <br>
+    <div class="text-right" style="margin-right: 20px">
+      <div class="mb-5" style="margin-right: 28px">
+        <strong style="text-size:5em">Total</strong>
+      </div>
+      <div class="Numeral text-4xl sm:text-7xl">
+        {{action.prix*action.nombre}}
+      </div>
+    </div>
+
+    <div style="text-align: center">
+      <button class="btn btn-success" (click)="addAction(action)">Acheter</button>
+    </div>
+
+  </div>
+
+
+<div class="result" style="border: outset grey;width: 50%; border-radius: 10%;;float: right;margin-left: 20px ">
+  <h2 class="h2-result">
+
+      <span class="title-wrapper" style="margin-left: 15px;">
+       Mes Actions</span>
+  </h2>
+
+  <div style="display: inline">
+    <div  style="float: left;width: 200px;margin-top:40px">
+
+      <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+          <th scope="col">Titre</th>
+          <th scope="col">Prix</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Type</th>
+          <th scope="col">Total</th>
+        </tr>
+        </thead>
+
+        <tbody *ngFor='let act of listActions '>
+        <tr>
+
+          <td>{{act.titre}}</td>
+          <td>{{act.prix}}</td>
+          <td>{{act.nombre}}</td>
+          <td>{{act.type}} </td>
+          <td>{{act.total}} TND</td>
+        </tr>
+
+
+        </tbody>
+
+      </table>
+      <div id="chartContainer" style="height: 250px; width: 100%; margin:auto;"></div>
+    </div>
+
+  </div>
+    <!--
+<div style="float: right">
+<table class="Table Table--numerical Table--borderedRows>">
+  <tbody>
+  <tr>
+    <td colspan="3">
+
+      <h6 class="heading-secondry text-size-md mb-0">
+
+     Total saving breakdown
+      </h6>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="width: 20px !important">
+      <div class="square-block fill-color-a"></div>
+
+    </td>
+    <td class="text-left"> Intérêts gagnés</td>
+    <td class="text-right">
+    <strong class="type-body-two text-size-md">
+      $ {{interestE}}
+    </strong>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="square-block fill-color-b"></div>
+    </td>
+    <td class="text-left"> Contrubition totale</td>
+    <td class="text-right">
+      <strong class="type-body-two text-size-md">
+        $ {{contubition}}
+      </strong>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <div class="square-block fill-color-c"></div>
+    </td>
+    <td class="text-left"> Depot Initial</td>
+    <td class="text-right">
+      <strong class="type-body-two text-size-md">
+        $ {{init}}
+      </strong>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div class="text-right" style="margin-right: 20px">
+  <div class="mb-5" style="margin-right: 28px">
+    <strong style="text-size:5em">Your total saving</strong>
+  </div>
+  <div class="Numeral text-4xl sm:text-7xl">
+    <span class="Numeral-accent">$</span>
+    {{res}}
+
+
+  </div>
+</div>
+</div> -->
+
+
+
+
+  </div>
+
+
+</div>
+<!--
+<div class="result" style="border: outset grey;width: 50%; border-radius: 10%;;float: right;margin-left: 20px ">
+  <h2 class="h2-result">
+
+      <span class="title-wrapper" style="margin-left: 15px;">
+       Mes Actions</span>
+  </h2>
+
+  <div style="display: inline">
+    <div  style="float: left;width: 200px;margin-top:40px">
+
+      <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+          <th scope="col">Titre</th>
+          <th scope="col">Prix</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Type</th>
+          <th scope="col">Total</th>
+        </tr>
+        </thead>
+
+        <tbody *ngFor='let act of listActions ' >
+        <tr>
+
+          <td>{{act.titre}}</td>
+          <td>{{act.prix}}</td>
+          <td>{{act.nombre}}</td>
+          <td>{{act.type}} </td>
+          <td>{{act.total}} TND</td>
+        </tr>
+
+
+        </tbody>
+
+      </table>
+      <div id="chartContainer" style="height: 250px; width: 100%; margin:auto;"></div>
+    </div>
+  </div>
+
+
+</div>
+-->
+
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by title"
+        [(ngModel)]="titre"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-success"
+          type="button"
+          (click)="searchTitle()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+    <hr>
+<app-excel></app-excel>
+<h3>Mes Actions</h3>
+
+<table class="table table-hover table-bordered">
+  <thead>
+  <tr>
+    <th scope="col">Titre</th>
+    <th scope="col">Prix</th>
+    <th scope="col">Nombre</th>
+    <th scope="col">Type</th>
+    <th scope="col">Total</th>
+  </tr>
+  </thead>
+
+  <tbody  *ngFor='let act of listActions ' >
+  <tr>
+
+    <td>{{act.titre}}</td>
+    <td>{{act.prix}}</td>
+    <td>{{act.nombre}}</td>
+    <td>{{act.type}} </td>
+    <td>{{act.total}} TND</td>
+  </tr>
+
+
+  </tbody>
+
+</table>
+
+<hr>

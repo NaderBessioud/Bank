@@ -1,0 +1,24 @@
+<div class="container  content ">
+  <div class="card mt-5 bg-info ">
+    <div class="card-body mt-5 ">
+      <form>
+        <div class="form-group  ">
+          <label for="file" class="text-light">Importer fichier Excel :</label>
+          <input required type="file" class="text-light" id="file" (change)="selectfile($event)">
+          <button type="submit" (click)="onUpload()" class="btn btn-success">
+            Importer
+          </button>
+          <div>
+            <label for="file" class="text-light">Exporter fichier Excel :</label>
+            <button type="submit" (click)="download()" class="btn btn-success">
+              Exporter
+            </button>
+          </div>
+          <div class="container mt-3" *ngIf="loading">
+            <h2 class="text-light">Loading...</h2>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
